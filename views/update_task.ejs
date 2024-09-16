@@ -1,0 +1,54 @@
+<%- include('include/_header') %>
+
+<main id="site-main">
+    <div class="container">
+        <div class="box-nav d-flex justify-between">
+            <div class="filter">
+                <a href="/"><i class="fas fa-angle-double-left"></i> All Tasks</a>
+            </div>
+        </div><br>
+        <div class="form-title text-center">
+            <h2 class="text-dark">Update Task</h2>
+            <span class="text-light">Use the form below to update the Task</span>
+        </div><br>
+
+        <form method="POST" id="update_task">
+            <div class="new_task">
+                <div class="form-group">
+                    <label for="task" class="text-light"><b>Task</b></label>
+                    <input type="hidden" name="id" value="<%= task._id %>">
+                    <input type="text" name="task" value="<%= task.task %>" placeholder="Enter Task">
+                </div>
+                <div class="form-group">
+                    <label for="status" class="text-light"><b>Status</b></label>
+                    <div class="radio inline">
+                        <input type="radio" id="radio-1" name="status" value="Complete" <%= task.status === 'Complete' ? 'checked' : '' %>>
+                        <label for="radio-1" class="radio-label">Complete</label>
+                    </div>
+                    <div class="radio inline">
+                        <input type="radio" id="radio-2" name="status" value="Incomplete" <%= task.status === 'Incomplete' ? 'checked' : '' %>>
+                        <label for="radio-2" class="radio-label">Incomplete</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="due-date" class="text-light"><b>Due Date</b></label>
+                    <% 
+                        let dueDate = '';
+                        if (task.date) {
+                            let dateObj = new Date(task.date);
+                            if (!isNaN(dateObj.getTime())) {
+                                dueDate = dateObj.toISOString().split('T')[0];
+                            }
+                        }
+                    %>
+                    <input type="date" name="date" id="due-date" value="<%= dueDate %>">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn text-dark update">Save</button>
+                </div><br><br>
+            </div>
+        </form>
+    </div>
+</main>
+
+<%- include('include/_footer') %>

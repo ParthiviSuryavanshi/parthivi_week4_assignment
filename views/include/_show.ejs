@@ -1,0 +1,20 @@
+<% for (var i = 0; i < tasks.length; i++) { %>
+    <tr>
+        <td><%= i + 1 %></td>
+        <td><%= tasks[i].task %></td>
+        <td><%= tasks[i].status %></td>
+        <td>
+            <i class="fa-solid fa-calendar-days"></i>
+            <%= new Date(tasks[i].date).toISOString().split('T')[0] %> 
+        </td>
+        <td>
+            <a href="/update-task?id=<%=tasks[i]._id%>" class="btn border-shadow update">
+                <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
+            </a>
+            <a class="btn border-shadow delete" data-id=<%=tasks[i]._id%>>
+                <span class="text-gradient"><i class="fa-solid fa-trash"></i></span>
+            </a>
+        </td>
+    </tr>
+    <% } %>
+    
